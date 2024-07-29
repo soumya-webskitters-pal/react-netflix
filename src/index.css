@@ -1,0 +1,238 @@
+*{
+  box-sizing: border-box;
+}
+body{margin:0;}
+
+/*--import fonts--*/
+
+@import url("https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800&display=swap");
+@font-face {
+  font-family: AvenirNext;
+  src: url(../fonts/AvenirNextLTPro-Regular.woff2) format("woff2"),
+    url(../fonts/AvenirNextLTPro-Regular.woff) format("woff"),
+    url(../fonts/AvenirNextLTPro-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+/* Common Style Start */
+
+html {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  margin: 0;
+  /* font-family: "Gilroy", sans-serif; */
+  font-family: "Muli", sans-serif;
+  font-weight: 400;
+  color: #000;
+}
+
+img {
+  max-width: 100%;
+  display: inline-block;
+  height: auto;
+  vertical-align: middle;
+}
+a {
+  text-decoration: none;
+}
+a,
+button,
+input[type="submit"] {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  border: none;
+}
+
+a,
+button,
+input {
+  transition: all ease-in-out 0.3s;
+  -webkit-transition: all ease-in-out 0.3s;
+  -moz-transition: all ease-in-out 0.3s;
+}
+
+a:hover,
+a:focus,
+a:active {
+  text-decoration: none;
+}
+
+a,
+span,
+strong,
+small {
+  display: inline-block;
+}
+
+section,
+main,
+address,
+aside,
+figure,
+figcaption {
+  display: block;
+}
+
+strong,
+label {
+  font-weight: 700;
+}
+
+figure {
+  margin: 0;
+}
+
+p {
+  margin: 0 0 20px 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: inherit;
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-weight: 800;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+::placeholder {
+  color: #ccc !important;
+  opacity: 0.6 !important;
+}
+
+::-webkit-input-placeholder {
+  color: #ccc !important;
+  opacity: 0.6 !important;
+}
+
+::-moz-placeholder {
+  color: #ccc !important;
+  opacity: 0.6 !important;
+}
+
+:-ms-input-placeholder {
+  color: #ccc !important;
+  opacity: 0.6 !important;
+}
+
+:-moz-placeholder {
+  color: #ccc !important;
+  opacity: 0.6 !important;
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  text-align: center;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  outline: none;
+  text-decoration: none;
+}
+
+a:focus,
+button:focus {
+  outline: 0;
+}
+
+.btn:focus,
+.btn.focus {
+  outline: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="tel"],
+input[type="range"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="color"],
+textarea,
+.form-control {
+  display: inline-block;
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  vertical-align: middle;
+  border-radius: 2px;
+}
+
+.btn-primary.focus,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.show > .btn-primary.dropdown-toggle:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  text-align: center;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input:focus,
+button:focus {
+  outline: none !important;
+  text-decoration: none;
+  box-shadow: none !important;
+}
+
+button:focus {
+  outline: 0;
+}
+
+select {
+  background: url(../src/assets/images/down-arrow.svg) right 10px center
+    no-repeat;
+  background-size: 20px;
+}
+
+select[multiple] {
+  background: transparent;
+  min-height: 85px;
+}
