@@ -12,12 +12,14 @@ import SelectBox               from './SelectBox.jsx';
 function App() {
   const [product_data, setProductData] = useState([]);
   const [currencies, setCurrencies] = useState([]);
+  const [selectedItem, selectitem] = useState([]);
   useEffect(() => {
     setProductData(PageData.Products);
     setCurrencies(PageData.Currencies);
   }, []);
-  const selectCurrency = (m, n) => {
-    console.log(">>",m, n)
+  const selectCurrency = (m, n, x) => {
+    // x != undefined ? selectitem(PageData.Currencies[x]) : selectedItem(PageData.Currencies[0]);
+    console.log(">>", m, n, x)
     return (m !== n ? m : m)
   }
   const SelectHandler = (e, m) => {
