@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState }            from "react";
 import SlickSlider                    from "react-slick";
-
-function List({ items, heading, error, OnSelectHandler, selection, sliderSetting }) {
+import Currency                       from "./Currency";
+function List({ items, heading, error, OnSelectHandler, selection, currencyTag,sliderSetting }) {
     const [selectedIndex, setIndex] = useState();
     return <>
         <h1 className="heading">{heading}</h1>
@@ -25,11 +25,11 @@ function List({ items, heading, error, OnSelectHandler, selection, sliderSetting
                         className={selectedIndex === index || (selectedIndex === undefined && index === selection) ? "list-item active" : "list-item"}
                         onClick={() => {
                             OnSelectHandler(item, index);
-                            setIndex(index)
+                            setIndex(index);
                         }}>
-                        <img src={`../src/assets/images/${item.Image ? item.Image : 'placeholder.png'}`} alt={item.Name} />
+                        <img src={`${item.Image ? item.Image : 'placeholder.png'}`} alt={item.Name} />
                         <h3>{item.Name}</h3>
-                        <div className="price">{item.Price}{item.PriceUnit}</div>
+                        {/* <div className="price"><Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> */}
                         {item.Description ? <p>{item.Description}</p> : null}
                         <a href="#" className="btn btn_action">Rent NOW</a>
                         <a href="#" className="btn btn_action">Watch NOW</a>

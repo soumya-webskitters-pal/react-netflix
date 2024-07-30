@@ -230,40 +230,51 @@ export const PageData = {
       Id: 1,
       Name: "Star wars",
       Price: 8,
-      PriceUnit: "$",
+      Currency: "USD",
       Description: "lorem ipsum dolor",
-      Image: "timeline1.svg"
+      Image: "https://picsum.photos/id/230/200/300"
     },
     {
       Id: 2,
       Name: "Rambo",
       Price: 5,
-      PriceUnit: "$",
+      Currency: "USD",
       Description: "lorem ipsum dolor",
-      Image: "timeline2.svg"
+      Image: "https://picsum.photos/id/231/200/300"
     },
     {
       Id: 3,
       Name: "Avatar: the way of water",
       Price: 20,
-      PriceUnit: "$",
+      Currency: "USD",
       Description: "lorem ipsum dolor",
-      Image: "timeline3.svg"
+      Image: "https://picsum.photos/id/232/200/300"
     },
     {
       Id: 4,
       Name: "Spiderman: Homecoming",
       Price: 18,
-      PriceUnit: "$",
-      Image: "timeline4.svg"
+      Currency: "USD",
+      Image: "https://picsum.photos/id/233/200/300"
     },
     {
       Id: 5,
       Name: "The Avengers",
       Price: 7,
-      PriceUnit: "$",
+      Currency: "USD",
       Description: "lorem ipsum dolor",
-      Image: "timeline5.svg"
+      Image: "https://picsum.photos/id/234/200/300"
     },
+  ],
+  Currencies: [{
+    value: "USD",
+    label: "United States dollar"
+  }, {
+    value: "INR",
+    label: "Indian Rupee"
+  }, {
+    value: "EUR",
+    label: "Euro"
+  }
   ]
 };

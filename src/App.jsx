@@ -11,15 +11,29 @@ import SelectBox               from './SelectBox.jsx';
  */
 function App() {
   const [product_data, setProductData] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
   useEffect(() => {
     setProductData(PageData.Products);
+    setCurrencies(PageData.Currencies);
   }, []);
+  const selectCurrency = (m, n) => {
+    console.log(">>",m, n)
+    return (m !== n ? m : m)
+  }
   const SelectHandler = (e, m) => {
     console.log(e, m)
   }
   return (
     <>
-      <SelectBox></SelectBox>
+      <SelectBox
+        options={(
+          currencies.map((item) => {
+            return item
+          })
+        )}
+        OnSelectCurrenciesHandler={selectCurrency}
+        selection={1}
+      ></SelectBox>
       < ListItem
         items={(product_data.map((item) => {
           return item
@@ -29,6 +43,7 @@ function App() {
         error={"Sorry, no data found"}
         OnSelectHandler={SelectHandler}
         selection={1}
+        currencyTag={selectCurrency()}
         sliderSetting={{
           arrows: true,
           dots: false,
