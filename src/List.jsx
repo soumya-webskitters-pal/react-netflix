@@ -1,14 +1,18 @@
 import "./assets/css/List.css";
-import { useState } from 'react'
-import SlickSlider  from "react-slick";
-import moment       from "moment";
-import Modal        from "./Modal";
-import Currency     from "./Currency";
+import { useState, useEffect } from 'react'
+import SlickSlider from "react-slick";
+import moment from "moment";
+import Modal from "./Modal";
+import Currency from "./Currency";
 function List({ items, error, OnSelectHandler, selection, currencyTag, sliderSetting }) {
     const [selectedIndex, setIndex] = useState();
-    const [isOpen, setIsOpen] = useState([]);
-    const nowData = moment().format('yyyy');
+    const [isOpen, setIsOpen] = useState(false);
+    const [modalData, setModalData] = useState();
+    const nowData = moment().format('yyyy'), freeAfer = 15;
 
+    useEffect(() => {
+        setModalData(modalData)
+    });
     return <>
         {items.length === 0 && <p>{error}</p>}
         <link
@@ -40,8 +44,19 @@ function List({ items, error, OnSelectHandler, selection, currencyTag, sliderSet
                             {item.Author ? <div className="item_auth"><p>{item.Author}</p></div> : null}
                             {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
                             <div className="btn_wrap">
-                                {item.Sale && moment(nowData).diff(moment(String(item.releaseYear)), 'years') > 15 ?
-                                    (<button data-href={item.Video} className="btn btn_action" onClick={() => setIsOpen(true)}>Free to watch</button>
+                                {item.Sale && moment(nowData).diff(moment(String(item.releaseYear)), 'years') > freeAfer ?
+                                    (<button data-href={item.Video} className="btn btn_action" onClick={() => {
+                                        setIsOpen(true),
+                                            setModalData([{
+                                                Title: item.Name,
+                                                Content: {
+                                                    Link: item.Video,
+                                                },
+                                                refModal: "product_modal",
+                                                modalState: "open"
+                                            }])
+                                    }
+                                    }>Free to watch</button>
                                     )
                                     : (<div className="btn_wrap_buy">
                                         <a href="#" className="btn btn_action">Buy</a>
@@ -55,8 +70,8 @@ function List({ items, error, OnSelectHandler, selection, currencyTag, sliderSet
                 ))
             }
         </SlickSlider>
-        {/* {isOpen && <Modal setIsOpen={setIsOpen} Title="Watch Video" modalData="modal data" refModal="product_modal"></Modal>} */}
-        {isOpen && <Modal setIsOpen={setIsOpen} modalState={isOpen?"open":"close"}></Modal>}
+        {/* {isOpen && <Modal setIsOpen={setIsOpen} Title="Watch Video" modalData="modal data" refModal="product_modal" modalState="open"></Modal>} */}
+        {isOpen && <Modal setIsOpen={setIsOpen} modalData></Modal>}
     </>;
 }
 export default List;
