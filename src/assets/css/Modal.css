@@ -1,0 +1,69 @@
+.modal_backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal_dialog {
+    max-width: 800px;
+    margin: 25px auto;
+}
+
+.modal_inner {
+    background-color: var(--white);
+    color: var(--black);
+    font-size: 16px;
+}
+
+.modal_inner>div {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.modal_header,
+.modal_body {
+    padding-top: 20px;
+}
+
+.modal_body {
+    padding-bottom: 30px;
+}
+
+.modal_closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px;
+    width: 30px;
+    background-color: var(--black);
+    color: var(--white);
+    font-size: 14px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: opacity 0.5s ease;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -ms-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+}
+
+.modal_closeBtn:hover {
+    opacity: 0.5;
+}

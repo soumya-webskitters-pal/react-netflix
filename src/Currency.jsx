@@ -6,6 +6,8 @@ import React, { useEffect, useState } from 'react';
 const Currency = (getCurrencyData) => {
     console.log(getCurrencyData);
     const [currency, setCurrency] = useState({ data: [] });
+
+    currency = { data: { "INR": 84.4589412 } };
     function toFixedTrunc(x, n) {
         const v = (typeof x === 'string' ? x : x.toString()).split('.');
         if (n <= 0) return v[0];
@@ -14,19 +16,19 @@ const Currency = (getCurrencyData) => {
         while (f.length < n) f += '0';
         return `${v[0]}.${f}`
     }
-    const apiAsset = {
-        url: "https://api.freecurrencyapi.com/v1/latest",
-        apiKey: "fca_live_iTu53TOf94Z7oLeP1vqdTPOrtTvq1a8qlqqDqRGU",
-        baseCurrency: String(getCurrencyData.baseCurrency),
-        currencies: String(getCurrencyData.convertedCurrency),
-    };
-    const responseURL = `${apiAsset.url}?apikey=${apiAsset.apiKey}&currencies=${apiAsset.currencies}&base_currency=${apiAsset.baseCurrency}`;
-    useEffect(() => {
-        fetch(responseURL)
-            .then(response => response.json())
-            .then(json => setCurrency(JSON.stringify(json.data)))
-            .catch(error => console.error(error));
-    }, []);
+    // const apiAsset = {
+    //     url: "https://api.freecurrencyapi.com/v1/latest",
+    //     apiKey: "fca_live_iTu53TOf94Z7oLeP1vqdTPOrtTvq1a8qlqqDqRGU",
+    //     baseCurrency: String(getCurrencyData.baseCurrency),
+    //     currencies: String(getCurrencyData.convertedCurrency),
+    // };
+    // const responseURL = `${apiAsset.url}?apikey=${apiAsset.apiKey}&currencies=${apiAsset.currencies}&base_currency=${apiAsset.baseCurrency}`;
+    // useEffect(() => {
+    //     fetch(responseURL)
+    //         .then(response => response.json())
+    //         .then(json => setCurrency(JSON.stringify(json.data)))
+    //         .catch(error => console.error(error));
+    // }, []);
     return (
         <>
             {

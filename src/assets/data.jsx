@@ -222,59 +222,91 @@ export const PageData = {
         ],
       },
     },
-    Advertisers: {},
-    Bloggers: {},
+    Products: {
+      Page: "Products",
+      Title: "Buy Videos",
+      SubText: "Get ready to watch the best videos.",
+      Cta: "",
+      CtaURL: "",
+      Image: "https://picsum.photos/1920/1080?grayscale",
+    }
   },
   Products: [
     {
       Id: 1,
-      Name: "Star wars",
+      Name: "What care can you get for a grand?",
+      releaseYear: 1940,
       Price: 8,
       Currency: "USD",
-      Description: "lorem ipsum dolor",
-      Image: "https://picsum.photos/id/230/200/300"
+      Author: "By Garage419",
+      Description: "The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.",
+      Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WhatCarCanYouGetForAGrand.jpg",
+      Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4",
+      Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+      Sale: false,
     },
     {
       Id: 2,
-      Name: "Rambo",
+      Name: "Tears of Steel",
+      releaseYear: 1990,
       Price: 5,
       Currency: "USD",
-      Description: "lorem ipsum dolor",
-      Image: "https://picsum.photos/id/231/200/300"
+      Author: "By Blender Foundation",
+      Description: "Tears of Steel was realized with crowd - funding by users of the open source 3D creation tool Blender.Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci - fi film in Amsterdam, the Netherlands.The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license.Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - http://www.tearsofsteel.org",
+      Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg",
+      Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+      Sale: false,
     },
     {
       Id: 3,
-      Name: "Avatar: the way of water",
+      Name: "For Bigger Blazes",
+      releaseYear: 2020,
       Price: 20,
       Currency: "USD",
-      Description: "lorem ipsum dolor",
-      Image: "https://picsum.photos/id/232/200/300"
+      Author: "By Google",
+      Description: "HBO GO now works with Chromecast -- the easiest way to enjoy online video on your TV. For when you want to settle into your Iron Throne to watch the latest episodes. For $35.\nLearn how to use Chromecast with HBO GO and more at google.com/chromecast.",
+      Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg",
+      Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+      Sale: false,
     },
     {
       Id: 4,
-      Name: "Spiderman: Homecoming",
+      Name: "Elephant Dream",
+      releaseYear: 2024,
       Price: 18,
       Currency: "USD",
-      Image: "https://picsum.photos/id/233/200/300"
+      Author: "By Blender Foundation",
+      Description: "The first Blender Open Movie from 2006",
+      Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg",
+      Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+      Sale: true,
     },
     {
       Id: 5,
-      Name: "The Avengers",
+      Name: "Big Buck Bunny",
       Price: 7,
+      releaseYear: 2000,
       Currency: "USD",
-      Description: "lorem ipsum dolor",
-      Image: "https://picsum.photos/id/234/200/300"
-    },
+      Author: "By Blender Foundation",
+      Description: "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",
+      Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg",
+      Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
+      Sale: true,
+    }
   ],
   Currencies: [{
     value: "USD",
-    label: "United States dollar"
+    label: "United States dollar",
   }, {
     value: "INR",
-    label: "Indian Rupee"
+    label: "Indian Rupee",
   }, {
     value: "EUR",
-    label: "Euro"
+    label: "Euro",
   }
   ]
 };

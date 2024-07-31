@@ -1,17 +1,28 @@
-*{
+* {
   box-sizing: border-box;
 }
-body{margin:0;}
+
+body {
+  margin: 0;
+}
 
 /*--import fonts--*/
 
 @import url("https://fonts.googleapis.com/css?family=Muli:300,400,600,700,800&display=swap");
+
 @font-face {
   font-family: AvenirNext;
   src: url(../fonts/AvenirNextLTPro-Regular.woff2) format("woff2"),
     url(../fonts/AvenirNextLTPro-Regular.woff) format("woff"),
     url(../fonts/AvenirNextLTPro-Regular.ttf) format("truetype");
   font-weight: 400;
+}
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --blue: #2da2ca;
+  --gray: #dfdfdf;
 }
 
 /* Common Style Start */
@@ -34,15 +45,32 @@ body {
   color: #000;
 }
 
+h1,
+.h1 {
+  font-size: 54px;
+}
+
+h2,
+.h2 {
+  font-size: 42px;
+}
+
+h3,
+.h3 {
+  font-size: 36px;
+}
+
 img {
   max-width: 100%;
   display: inline-block;
   height: auto;
   vertical-align: middle;
 }
+
 a {
   text-decoration: none;
 }
+
 a,
 button,
 input[type="submit"] {
@@ -201,7 +229,7 @@ textarea,
 .btn-primary:focus,
 .btn-primary:not(:disabled):not(.disabled).active:focus,
 .btn-primary:not(:disabled):not(.disabled):active:focus,
-.show > .btn-primary.dropdown-toggle:focus {
+.show>.btn-primary.dropdown-toggle:focus {
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -227,12 +255,56 @@ button:focus {
 }
 
 select {
-  background: url(../src/assets/images/down-arrow.svg) right 10px center
-    no-repeat;
+  background: url(../src/assets/images/down-arrow.svg) right 10px center no-repeat;
   background-size: 20px;
 }
 
 select[multiple] {
   background: transparent;
   min-height: 85px;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.btn_wrap {
+  display: flex;
+  align-items: center;
+  margin-left: -5px;
+  margin-right: -5px;
+  margin-top: 25px;
+}
+
+.btn_wrap .btn {
+  margin: 0 5px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 25px;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
+  color: var(--white);
+  background-color: var(--black);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background-color 300ms ease;
+  -webkit-transition: background-color 300ms ease;
+  -moz-transition: background-color 300ms ease;
+  -ms-transition: background-color 300ms ease;
+  -o-transition: background-color 300ms ease;
+}
+
+.btn:hover {
+  color: var(--black);
+  background-color: var(--white);
 }
