@@ -1,60 +1,86 @@
+import { useState } from 'react'
 import "./assets/css/List.css";
-import { useState, useEffect } from 'react'
-import SlickSlider from "react-slick";
-import moment from "moment";
+
 import Modal from "./Modal";
 import Currency from "./Currency";
-function List({ items, error, OnSelectHandler, selection, currencyTag, sliderSetting }) {
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/css';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css/navigation';
+
+// import TruncateMarkup from 'react-truncate-markup';
+
+import moment from "moment";
+
+function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
     const [selectedIndex, setIndex] = useState();
-    const [isOpen, setIsOpen] = useState(false);
-    const [modalData, setModalData] = useState();
     const nowData = moment().format('yyyy'), freeAfer = 15;
 
-    useEffect(() => {
-        setModalData(modalData)
-    });
+    const [data, setData] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleItem = (item = null) => {
+        setData(item);
+        setIsOpen(item !== null);
+        const html = document.querySelector('html');
+        isOpen ? html.style.overflow = 'auto' : html.style.overflow = 'hidden'
+    };
+
     return <>
         {items.length === 0 && <p>{error}</p>}
-        <link
-            rel="stylesheet"
-            type="text/css"
-            charSet="UTF-8"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
-        />
-        <link
-            rel="stylesheet"
-            type="text/css"
-            charSet="UTF-8"
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
-        />
-        <SlickSlider className="list_box" {...sliderSetting}>
+        <Swiper
+            className="list_box" {...sliderSetting}
+            navigation={true}
+            modules={[Navigation]}
+        // onSlideChange={(e) => console.log(e)}
+        // onSwiper={(swiper) => console.log(swiper)}
+        >
             {
                 items.map((item, index) => (
-                    <div key={index}
+                    <SwiperSlide key={index}
                         className={selectedIndex === index || (selectedIndex === undefined && index === selection) ? "list-item active" : "list-item"}
                         onClick={() => {
                             OnSelectHandler(item, index);
                             setIndex(index);
                         }}>
                         <div className="inner_item">
-                            <img src={`${item.Image ? item.Image : 'placeholder.png'}`} alt={item.Name} />
-                            <h3 className="item_title">{item.Name} {item.releaseYear ? <span className="year">- {item.releaseYear}</span> : null}</h3>
-                            {/* <div className="price"><Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> */}
-                            {item.Description ? <div className="item_desc"><p>{item.Description}</p></div> : null}
+                            {item.Image ?
+                                <figure className="item_img"><img src={item.Image} alt={item.Name} /></figure>
+                                :
+                                <figure className="item_img"><img src='placeholder.png' alt={item.Name} /></figure>}
+
+                            <h3 className="item_title">{item.Name} {item.releaseYear ?
+                                <span className="year">- {item.releaseYear}</span>
+                                : null}</h3>
+
                             {item.Author ? <div className="item_auth"><p>{item.Author}</p></div> : null}
+
+                            {/* <div className="price"><Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> */}
+
+                            {item.Description ?
+                                <div className="item_desc">
+                                    {/* <TruncateMarkup lines={4}> */}
+                                    <p>{
+                                        item.Description
+                                    }</p>
+                                    {/* </TruncateMarkup> */}
+                                </div>
+                                : null}
+
                             {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
+
                             <div className="btn_wrap">
                                 {item.Sale && moment(nowData).diff(moment(String(item.releaseYear)), 'years') > freeAfer ?
                                     (<button data-href={item.Video} className="btn btn_action" onClick={() => {
-                                        setIsOpen(true),
-                                            setModalData([{
-                                                Title: item.Name,
-                                                Content: {
-                                                    Link: item.Video,
-                                                },
-                                                refModal: "product_modal",
-                                                modalState: "open"
-                                            }])
+                                        toggleItem({
+                                            Title: `<h2>${item.Name} <span className="year">- ${item.releaseYear}</span></h2>`,
+                                            Content:
+                                                `<video poster=${item.Image} controls>
+                                                    <source src=${item.Video} type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>`,
+                                            Class: "product_modal center",
+                                        })
                                     }
                                     }>Free to watch</button>
                                     )
@@ -66,12 +92,13 @@ function List({ items, error, OnSelectHandler, selection, currencyTag, sliderSet
                                 }
                             </div>
                         </div>
-                    </div>
+                    </SwiperSlide>
                 ))
             }
-        </SlickSlider>
-        {/* {isOpen && <Modal setIsOpen={setIsOpen} Title="Watch Video" modalData="modal data" refModal="product_modal" modalState="open"></Modal>} */}
-        {isOpen && <Modal setIsOpen={setIsOpen} modalData></Modal>}
+        </Swiper>
+        {isOpen && data !== null && (
+            <Modal modalData={data} closeModal={() => toggleItem()} />
+        )}
     </>;
 }
 export default List;

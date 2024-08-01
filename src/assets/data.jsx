@@ -229,6 +229,20 @@ export const PageData = {
       Cta: "",
       CtaURL: "",
       Image: "https://picsum.photos/1920/1080?grayscale",
+      FeatureSec: [
+        {
+          Title: "list of Movie by year",
+          SubText: "lorem ipsum dolor loris ipsum lorem dolor.",
+        },
+        {
+          Title: "list of Movie by year",
+          SubText: "lorem ipsum dolor loris ipsum lorem dolor.",
+          Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sem orci, feugiat vel magna in, sagittis blandit elit. Nullam sit amet justo eget ante posuere volutpat non in mi. Ut ullamcorper tellus odio, iaculis sodales purus feugiat et. Nulla facilisi. Donec auctor leo a massa fermentum aliquam. Nulla facilisis, odio quis condimentum tempus, tellus diam eleifend risus",
+          Image: "https://picsum.photos/1080/720",
+          Cta: "View More",
+          CtaURL: "#"
+        }
+      ]
     }
   },
   Products: [
@@ -256,7 +270,7 @@ export const PageData = {
       Image: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg",
       Video: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
       Trailer: "https://www.youtube.com/embed/bLvqoHBptjg",
-      Sale: false,
+      Sale: true,
     },
     {
       Id: 3,

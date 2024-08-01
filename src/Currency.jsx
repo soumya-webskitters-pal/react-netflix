@@ -33,10 +33,10 @@ const Currency = (getCurrencyData) => {
         <>
             {
                 currency != undefined && currency != null ?
-                    <span className='offer-price'>
-                        <span className='converted-price'>
+                    <span className="offer-price">
+                        <span className="converted-price">
                             {
-                                <span className='converted-price'>
+                                <span className="converted-price">
                                     {
                                         toFixedTrunc((Number(getCurrencyData.price) *
                                             Number(Object.values(currency.data)[0])), 2)
@@ -44,7 +44,7 @@ const Currency = (getCurrencyData) => {
                                 </span>
                             }
                         </span>
-                        <span className='converted-currency'>{apiAsset.currencies}</span>
+                        <span className="converted-currency">{apiAsset.currencies}</span>
                     </span> : <span className="price-loading">converting price...</span>
             }
         </>

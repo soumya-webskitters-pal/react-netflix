@@ -1,21 +1,43 @@
-.modal_backdrop {
+.modal_backdrop,
+.modal {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9999;
+    z-index: 9998;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal {
+.modal_backdrop:after {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 1s ease-in;
+    -webkit-transition: opacity 1s ease-in;
+    -moz-transition: opacity 1s ease-in;
+    -ms-transition: opacity 1s ease-in;
+    -o-transition: opacity 1s ease-in;
+    transition-delay: 0.5s;
+    opacity: 0;
+}
+
+.modal_backdrop.active:after,
+.modal.show .modal_inner {
+    opacity: 1;
+}
+
+.modal {
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.modal.center {
+    text-align: center;
 }
 
 .modal_dialog {
@@ -27,6 +49,15 @@
     background-color: var(--white);
     color: var(--black);
     font-size: 16px;
+    pointer-events: all;
+    transition: opacity 1.3s ease-in;
+    -webkit-transition: opacity 1.3s ease-in;
+    -moz-transition: opacity 1.3s ease-in;
+    -ms-transition: opacity 1.3s ease-in;
+    -o-transition: opacity 1.3s ease-in;
+    transition-delay: 0.5s;
+    opacity: 0;
+    position: relative;
 }
 
 .modal_inner>div {
@@ -44,9 +75,10 @@
 }
 
 .modal_closeBtn {
+    pointer-events: all;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: -15px;
+    right: -15px;
     height: 30px;
     width: 30px;
     background-color: var(--black);
@@ -62,8 +94,18 @@
     -moz-transition: opacity 0.5s ease;
     -ms-transition: opacity 0.5s ease;
     -o-transition: opacity 0.5s ease;
+    cursor: pointer;
 }
 
 .modal_closeBtn:hover {
-    opacity: 0.5;
+    color: var(--warning);
+}
+
+.modal_closeBtn svg {
+    width: 100%;
+    height: 100%;
+}
+
+.modal_body video {
+    width: 100%
 }
