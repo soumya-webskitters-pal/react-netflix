@@ -71,6 +71,10 @@
     padding-top: 20px;
 }
 
+.modal_header h2 {
+    margin-bottom: 0;
+}
+
 .modal_body {
     padding-bottom: 30px;
 }

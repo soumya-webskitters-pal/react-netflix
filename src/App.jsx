@@ -7,6 +7,7 @@ import ListItem                from './List.jsx';
 import SelectBox               from './SelectBox.jsx';
 import FeatureBox              from './FeatureBox.jsx';
 import Accordion               from './Accordion.jsx';
+import DataSortComponent       from './DataSortComponent.jsx';
 
 //import app css
 import './App.css';
@@ -41,33 +42,29 @@ export default function App() {
       console.log(e, m)
     }
 
-    //Sort data for Accordion Selection
-    var [sortState, setSortState] = useState("none");
-    const sortMethods = {
-      none: { method: (a, b) => null },
-      ascending: { method: undefined },
-      descending: { method: (a, b) => (a > b ? -1 : 1) },
+    ///sort date 
+    // const DataSortComponent = (data, type) => {
+    //   const sortedData = [...data].sort((a, b) => {
+    //     return a.Release.localeCompare(b.Release);
+    //   });
+    //   return sortedData;
+    // };
+    const DataSortComponent = (data) => {
+      const sortedData = [...data].sort((a, b) => {
+        return a.Release.localeCompare(b.Release);
+      });
+      var rearrangedData = {};
+      [...sortedData].map((item, i) => {
+        rearrangedData[i] = {
+          Id: item.Id,
+          Title: String(item.Release).split('-')[0],
+          Name: item.Name,
+          Content: item.Description,
+          Image: item.Image
+        };
+      });
+      return rearrangedData;
     };
-    var filterData;
-    // const sorted = productData.sort(function (a, b) {
-    //   return new Date(a.date) - new Date(b.date);
-    // });
-    // var byYearAndByMonth = {};
-
-    // sorted.map((item) => {
-    //   var year = item.date.substring(0, 4)
-    //   var month = item.date.substring(5, 7)
-
-    //   if (typeof byYearAndByMonth[year] === "undefined") {
-    //     byYearAndByMonth[year] = {};
-    //   }
-
-    //   if (typeof byYearAndByMonth[year][month] === "undefined") {
-    //     byYearAndByMonth[year][month] = [];
-    //   }
-    //   byYearAndByMonth[year][month].push(item);
-    // });
-    // console.log(byYearAndByMonth);
 
     return (
       <>
@@ -159,17 +156,7 @@ export default function App() {
               PageData.FeatureSec3.map((item, index) =>
                 <FeatureBox key={index} featureItems={item} alignment="center" error={"Sorry, no data found"}></FeatureBox>)
             }
-            <ul>
-              {/* {
-                [...productData] != undefined && (
-                  filterData = [...productData],
-                  filterData.sort(sortMethods[sortState].method).map((el, i) => (
-                    <li key={i}>{el}</li>
-                  ))
-                )
-              } */}
-            </ul>
-            {/* <Accordion items={[...productData]} error={"Sorry, no data found"}></Accordion> */}
+            <Accordion items={(DataSortComponent(productData))} error={"Sorry, no data found"}></Accordion>
           </div>
         </div>
       </>

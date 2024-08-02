@@ -52,11 +52,11 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 :
                                 <figure className="item_img"><img src='placeholder.png' alt={item.Name} /></figure>}
 
-                            <h3 className="item_title">{item.Name} {item.release ?
-                                <span className="year">- {String(item.release).split('-')[0]}</span>
+                            <h3 className="item_title">{item.Name} {item.Release ?
+                                <span className="year">- {String(item.Release).split('-')[0]}</span>
                                 : null}</h3>
 
-                            {item.Author ? <div className="item_auth"><p>{item.Author}</p></div> : null}
+                            {item.Author ? <div className="item_auth"><p>- By {item.Author}</p></div> : null}
 
                             {/* <div className="price"><Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> */}
 
@@ -73,10 +73,10 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                             {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
 
                             <div className="btn_wrap">
-                                {item.Sale && moment(nowData).diff(moment(String(item.release)), 'years') > freeAfer ?
+                                {item.Sale && moment(nowData).diff(moment(String(item.Release)), 'years') > freeAfer ?
                                     (<button data-href={item.Video} className="btn btn_action" onClick={() => {
                                         toggleItem({
-                                            Title: `<h2>${item.Name} <span className="year">- ${String(item.release).split('-')[0]}</span></h2>`,
+                                            Title: `<h2>${item.Name} <span className="year">- ${String(item.Release).split('-')[0]}</span></h2>`,
                                             Content:
                                                 `<video poster=${item.Image} controls>
                                                     <source src=${item.Video} type="video/mp4">
