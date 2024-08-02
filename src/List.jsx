@@ -1,19 +1,22 @@
-import { useState } from 'react'
-import "./assets/css/List.css";
+import { useState }            from 'react'
 
-import Modal from "./Modal";
-import Currency from "./Currency";
+import Modal                   from "./Modal";
+// import Currency from "./Currency";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
-import { Navigation } from 'swiper/modules';
+import { Navigation }          from 'swiper/modules';
 import 'swiper/css/navigation';
 
 // import TruncateMarkup from 'react-truncate-markup';
 
-import moment from "moment";
+import moment                  from "moment";
 
-function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
+//import list module css
+import "./assets/css/List.css";
+
+
+export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
     const [selectedIndex, setIndex] = useState();
     const nowData = moment().format('yyyy'), freeAfer = 15;
 
@@ -49,8 +52,8 @@ function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, e
                                 :
                                 <figure className="item_img"><img src='placeholder.png' alt={item.Name} /></figure>}
 
-                            <h3 className="item_title">{item.Name} {item.releaseYear ?
-                                <span className="year">- {item.releaseYear}</span>
+                            <h3 className="item_title">{item.Name} {item.release ?
+                                <span className="year">- {String(item.release).split('-')[0]}</span>
                                 : null}</h3>
 
                             {item.Author ? <div className="item_auth"><p>{item.Author}</p></div> : null}
@@ -70,10 +73,10 @@ function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, e
                             {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
 
                             <div className="btn_wrap">
-                                {item.Sale && moment(nowData).diff(moment(String(item.releaseYear)), 'years') > freeAfer ?
+                                {item.Sale && moment(nowData).diff(moment(String(item.release)), 'years') > freeAfer ?
                                     (<button data-href={item.Video} className="btn btn_action" onClick={() => {
                                         toggleItem({
-                                            Title: `<h2>${item.Name} <span className="year">- ${item.releaseYear}</span></h2>`,
+                                            Title: `<h2>${item.Name} <span className="year">- ${String(item.release).split('-')[0]}</span></h2>`,
                                             Content:
                                                 `<video poster=${item.Image} controls>
                                                     <source src=${item.Video} type="video/mp4">
@@ -101,4 +104,3 @@ function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, e
         )}
     </>;
 }
-export default List;

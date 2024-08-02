@@ -1,4 +1,4 @@
-function selectModule({ options, defaultValue, OnChangeHandler }) {
+export default function selectModule({ options, defaultValue, OnChangeHandler }) {
     if (options != undefined && options.length != 0) {
         console.log(defaultValue);
         return (
@@ -29,4 +29,3 @@ function selectModule({ options, defaultValue, OnChangeHandler }) {
         );
     }
 }
-export default selectModule;

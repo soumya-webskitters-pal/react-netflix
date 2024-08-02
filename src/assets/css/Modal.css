@@ -1,5 +1,5 @@
 .modal_backdrop,
-.modal {
+.page_modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -24,19 +24,20 @@
     -o-transition: opacity 1s ease-in;
     transition-delay: 0.5s;
     opacity: 0;
+    pointer-events: none;
 }
 
 .modal_backdrop.active:after,
-.modal.show .modal_inner {
+.page_modal.show .modal_inner {
     opacity: 1;
 }
 
-.modal {
+.page_modal {
     z-index: 9999;
     pointer-events: none;
 }
 
-.modal.center {
+.page_modal.center {
     text-align: center;
 }
 

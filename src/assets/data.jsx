@@ -1,5 +1,4 @@
-/* https://angularjsdevelopment.com/green-cosmic/index.html */
-export const PageData = {
+export const SiteData = {
   Header: {
     Icon: { Name: "green-cosmic", URL: "#", Path: "logo.svg" },
     Navbar: [
@@ -229,27 +228,42 @@ export const PageData = {
       Cta: "",
       CtaURL: "",
       Image: "https://picsum.photos/1920/1080?grayscale",
-      FeatureSec: [
+      FeatureSec1:
+        [{
+          Caption: "Why us",
+          SubText: "lorem ipsum dolor loris ipsum lorem dolor."
+        }
+        ],
+      FeatureSec2: [
         {
-          Title: "list of Movie by year",
-          SubText: "lorem ipsum dolor loris ipsum lorem dolor.",
-        },
-        {
-          Title: "list of Movie by year",
+          Title: "enjoy the best",
           SubText: "lorem ipsum dolor loris ipsum lorem dolor.",
           Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sem orci, feugiat vel magna in, sagittis blandit elit. Nullam sit amet justo eget ante posuere volutpat non in mi. Ut ullamcorper tellus odio, iaculis sodales purus feugiat et. Nulla facilisi. Donec auctor leo a massa fermentum aliquam. Nulla facilisis, odio quis condimentum tempus, tellus diam eleifend risus",
           Image: "https://picsum.photos/1080/720",
-          Cta: "View More",
+          Cta: "View more",
+          CtaURL: "#"
+        },
+        {
+          Title: "enjoy the best",
+          SubText: "lorem ipsum dolor loris ipsum lorem dolor.",
+          Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sem orci, feugiat vel magna in, sagittis blandit elit. Nullam sit amet justo eget ante posuere volutpat non in mi. Ut ullamcorper tellus odio, iaculis sodales purus feugiat et. Nulla facilisi. Donec auctor leo a massa fermentum aliquam. Nulla facilisis, odio quis condimentum tempus, tellus diam eleifend risus",
+          Image: "https://picsum.photos/1080/720",
+          Cta: "View more",
           CtaURL: "#"
         }
-      ]
+      ],
+      FeatureSec3:
+        [{
+          Caption: "list of Movie by year",
+        }
+        ],
     }
   },
   Products: [
     {
       Id: 1,
       Name: "What care can you get for a grand?",
-      releaseYear: 1940,
+      release: "1940-08-25",
       Price: 8,
       Currency: "USD",
       Author: "By Garage419",
@@ -262,7 +276,7 @@ export const PageData = {
     {
       Id: 2,
       Name: "Tears of Steel",
-      releaseYear: 1990,
+      release: "1990-02-15",
       Price: 5,
       Currency: "USD",
       Author: "By Blender Foundation",
@@ -275,7 +289,7 @@ export const PageData = {
     {
       Id: 3,
       Name: "For Bigger Blazes",
-      releaseYear: 2020,
+      release: "2020-10-30",
       Price: 20,
       Currency: "USD",
       Author: "By Google",
@@ -288,7 +302,7 @@ export const PageData = {
     {
       Id: 4,
       Name: "Elephant Dream",
-      releaseYear: 2024,
+      release: "2024-07-25",
       Price: 18,
       Currency: "USD",
       Author: "By Blender Foundation",
@@ -302,7 +316,7 @@ export const PageData = {
       Id: 5,
       Name: "Big Buck Bunny",
       Price: 7,
-      releaseYear: 2000,
+      release: "2000-08-09",
       Currency: "USD",
       Author: "By Blender Foundation",
       Description: "Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain't no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttp://www.bigbuckbunny.org",

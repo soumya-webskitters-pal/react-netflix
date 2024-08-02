@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 // console.log(Number(Object.values(currency2.data)[0]).toFixed(2));
 
 const Currency = (getCurrencyData) => {
-    console.log(getCurrencyData);
+  /*  console.log(getCurrencyData);
     const [currency, setCurrency] = useState({ data: [] });
 
     currency = { data: { "INR": 84.4589412 } };
@@ -48,7 +48,7 @@ const Currency = (getCurrencyData) => {
                     </span> : <span className="price-loading">converting price...</span>
             }
         </>
-    );
+    );*/
 };
 
 export default Currency;

@@ -1,8 +1,8 @@
-.container {
+/* .container {
     max-width: 1140px;
     margin: 0 auto;
     padding: 0 15px;
-}
+} */
 
 .btn_wrap {
     display: flex;
@@ -36,11 +36,13 @@
     -moz-transition: background-color 300ms ease;
     -ms-transition: background-color 300ms ease;
     -o-transition: background-color 300ms ease;
+    border: 1px solid var(--black);
 }
 
 .btn:hover {
     color: var(--black);
     background-color: var(--white);
+    border: 1px solid var(--black);
 }
 
 .section {

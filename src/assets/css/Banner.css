@@ -1,6 +1,5 @@
 .banner {
     position: relative;
-
 }
 
 .banner_bgImg {
@@ -33,4 +32,5 @@
 
 .banner.center {
     justify-content: center;
+    text-align: center;
 }

@@ -1,0 +1,27 @@
+.header {
+    margin-bottom: 40px;
+}
+
+.header h2 {
+    margin-bottom: 8px;
+}
+
+.header p {
+    font-size: 20px;
+}
+
+.header.center {
+    text-align: center;
+}
+
+.row.right .left_col {
+    order: 2
+}
+
+.row.right .right_col {
+    order: 1
+}
+
+.featureRow+.featureRow {
+    margin-top: 50px;
+}

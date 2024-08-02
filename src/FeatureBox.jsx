@@ -1,38 +1,48 @@
-function FeatureBox({ featureItems }) {
-    console.log(featureItems);
+//import Feature module css
+import "./assets/css/Feature.css";
+
+export default function FeatureBox({ featureItems, alignment, error }) {
+    // console.log(featureItems);
     return <>
-        {featureItems && featureItems.map((item, index) => {
-            {
-                item.Title ? (
-                    <div className="header"><h2>{item.Title}</h2></div>
-                ) : null
-            }
-            {
-                <div className={item.Content || item.Cta && item.Image ? `left_col col-md-6` : `left_col col-12`}>
+        {
+            featureItems.Caption ? (
+                <div className={alignment ? (
+                    alignment === "center" ? "header center" : (
+                        alignment === "left" ? "header right" : "header left"
+                    )
+                ) : "header"}>
+                    <h2>{featureItems.Caption}</h2>
+                    {featureItems.SubText ? <p>{featureItems.SubText}</p> : null}
+                </div>
+            ) : (
+                <div className={alignment ? (`row featureRow ${String(alignment).toLowerCase()}`) : "row featureRow"}>
+                    {featureItems.Title || featureItems.Content || featureItems.Cta ? (
+                        <div className={featureItems.Title || featureItems.Content || featureItems.Cta && featureItems.Image ? "left_col col-md-6" : "content_col col-12"}>
+                            {
+                                featureItems.Title ? (
+                                    <h3>{featureItems.Title}</h3>
+                                ) : null
+                            }
+                            {
+                                featureItems.Content ? (
+                                    <p>{featureItems.Content}</p>
+                                ) : null
+                            }
+                            {
+                                featureItems.Cta ? (
+                                    <a href={featureItems.CtaURL} className="btn cta">{featureItems.Cta}</a>
+                                ) : null
+                            }
+                        </div>
+                    ) : null}
                     {
-                        (
-                            item.Content ? (
-                                <p>{item.Content}</p>
-                            ) : null
-                        )
-                            (item.Cta ? (
-                                <a href={item.CtaURL} className="btn cta">{item.Cta}</a>
-                            ) : null)
+                        featureItems.Image ? (
+                            <div className={featureItems.Content || featureItems.Cta && featureItems.Image ? "right_col col-md-6" : "img_col col-12"}>
+                                <figure><img src={featureItems.Image} alt={featureItems.Title ? featureItems.Title : `feature image ${index}`} /></figure>
+                            </div>
+                        ) : null
                     }
                 </div>
-            }
-            {
-                <div className={item.Content || item.Cta && item.Image ? `right_col col-md-6` : `left_col col-12`}>
-                    {
-                        (
-                            item.Image ? (
-                                <figure><img src={item.Image} alt={item.Title ? item.Title : `feature image ${index}`} /></figure>
-                            ) : null
-                        )
-                    }
-                </div>
-            }
-        })}
+            )}
     </>
-}
-export default FeatureBox
+} 
