@@ -34,9 +34,9 @@ export default function ProductPage({ SiteData }) {
     ///sort date 
     const DataSortComponent = (data) => {
         const sortedData = [...data].sort((a, b) => a.Release.localeCompare(b.Release));
-        const rearrangedData = Object.fromEntries(
+        const rearrangedData = Object.entries(
             sortedData.map((item, i) => [
-                i, {
+                 {
                     Id: item.Id,
                     Title: item.Release.split('-')[0],
                     Name: item.Name,
