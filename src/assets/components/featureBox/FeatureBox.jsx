@@ -1,5 +1,5 @@
 //import Feature module css
-import "./assets/css/Feature.css";
+import "../featureBox/Feature.css";
 
 export default function FeatureBox({ featureItems, alignment, error }) {
     // console.log(featureItems);

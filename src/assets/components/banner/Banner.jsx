@@ -1,5 +1,5 @@
 //import banner module css
-import './assets/css/Banner.css';
+import "../banner/Banner.css";
 
 export default function Banner({ data }) {
     return <>

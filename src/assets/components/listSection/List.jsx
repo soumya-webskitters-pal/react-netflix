@@ -1,6 +1,6 @@
 import { useState, useRef }    from 'react'
 
-import Modal                   from "./Modal";
+import Modal                   from "../modals/Modal";
 // import Currency from "./Currency";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -11,7 +11,7 @@ import 'swiper/css/navigation';
 import moment                  from "moment";
 
 //import list module css
-import "./assets/css/List.css";
+import "../listSection/List.css";
 
 
 export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
@@ -67,7 +67,16 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 </div>
                                 : null}
 
-                            {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
+                            {item.Trailer && <span className="btn_trailer" onClick={() => {
+                                toggleItem({
+                                    Content:
+                                        `<video poster=${item.Image} controls>
+                                                        <source src=${item.Video} type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>`,
+                                    Class: "trailer_modal center",
+                                })
+                            }}>Watch Trailer</span>}
 
                             <div className="btn_wrap">
                                 {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfer ? (

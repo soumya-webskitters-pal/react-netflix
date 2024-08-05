@@ -1,7 +1,7 @@
 //import modal module css
-import "./assets/css/Modal.css";
+import "../modals/Modal.css";
 
-import { useRef } from 'react'
+import { useRef }       from 'react'
 import { createPortal } from "react-dom";
 export default function Modal({ modalData, closeModal }) {
     const modalRef = useRef(null);
