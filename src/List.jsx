@@ -1,4 +1,4 @@
-import { useState }            from 'react'
+import { useState, useRef }    from 'react'
 
 import Modal                   from "./Modal";
 // import Currency from "./Currency";
@@ -7,8 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import { Navigation }          from 'swiper/modules';
 import 'swiper/css/navigation';
-
-// import TruncateMarkup from 'react-truncate-markup';
 
 import moment                  from "moment";
 
@@ -20,13 +18,14 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
     const [selectedIndex, setIndex] = useState();
     const nowData = moment().format('yyyy'), freeAfer = 15;
 
+    //modal
     const [data, setData] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const toggleItem = (item = null) => {
         setData(item);
         setIsOpen(item !== null);
         const html = document.querySelector('html');
-        isOpen ? html.style.overflow = 'auto' : html.style.overflow = 'hidden'
+        isOpen ? html.classList.remove("overflow_hidden") : html.classList.add("overflow_hidden");
     };
 
     return <>
@@ -53,7 +52,7 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 <figure className="item_img"><img src='placeholder.png' alt={item.Name} /></figure>}
 
                             <h3 className="item_title">{item.Name} {item.Release ?
-                                <span className="year">- {String(item.Release).split('-')[0]}</span>
+                                <span className="year">- {item.Release.split('-')[0]}</span>
                                 : null}</h3>
 
                             {item.Author ? <div className="item_auth"><p>- By {item.Author}</p></div> : null}
@@ -62,31 +61,30 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
 
                             {item.Description ?
                                 <div className="item_desc">
-                                    {/* <TruncateMarkup lines={4}> */}
                                     <p>{
                                         item.Description
                                     }</p>
-                                    {/* </TruncateMarkup> */}
                                 </div>
                                 : null}
 
                             {item.Trailer ? <a href={item.Trailer} target="_blank" className="btn_trailer" rel="noopener noreferrer">Watch Trailer</a> : null}
 
                             <div className="btn_wrap">
-                                {item.Sale && moment(nowData).diff(moment(String(item.Release)), 'years') > freeAfer ?
-                                    (<button data-href={item.Video} className="btn btn_action" onClick={() => {
+                                {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfer ? (
+                                    < button className="btn btn_action" onClick={() => {
                                         toggleItem({
-                                            Title: `<h2>${item.Name} <span className="year">- ${String(item.Release).split('-')[0]}</span></h2>`,
+                                            Title: `${item.Name} <span className="year">- ${item.Release.split('-')[0]}</span>`,
                                             Content:
                                                 `<video poster=${item.Image} controls>
-                                                    <source src=${item.Video} type="video/mp4">
-                                                    Your browser does not support the video tag.
-                                                </video>`,
+                                                        <source src=${item.Video} type="video/mp4">
+                                                        Your browser does not support the video tag.
+                                                    </video>`,
                                             Class: "product_modal center",
                                         })
                                     }
-                                    }>Free to watch</button>
-                                    )
+                                    }
+                                    >Free to watch</button>
+                                )
                                     : (<div className="btn_wrap_buy">
                                         <a href="#" className="btn btn_action">Buy</a>
                                         <a href="#" className="btn btn_action">Rent</a>
@@ -99,8 +97,8 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                 ))
             }
         </Swiper>
-        {isOpen && data !== null && (
-            <Modal modalData={data} closeModal={() => toggleItem()} />
-        )}
+
+        {/* <Modal modalData={data} closeModal={() => toggleItem()} /> */}
+        {isOpen && data !== null && < Modal modalData={data} closeModal={() => toggleItem()} />}
     </>;
 }

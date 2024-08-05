@@ -1,3 +1,7 @@
+html.overflow_hidden {
+    overflow: hidden;
+}
+
 .modal_backdrop,
 .page_modal {
     position: fixed;
