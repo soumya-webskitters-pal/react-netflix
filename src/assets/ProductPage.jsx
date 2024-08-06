@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import Banner                  from './components/banner/Banner.jsx';
-import ListItem                from './components/listSection/List.jsx';
-import SelectBox               from './components/selectBox/SelectBox.jsx';
-import FeatureBox              from './components/featureBox/FeatureBox.jsx';
-import Accordion               from './components/accordion/Accordion.jsx';
+import Banner from './components/banner/Banner.jsx';
+import ListItem from './components/listSection/List.jsx';
+import SelectBox from './components/selectBox/SelectBox.jsx';
+import FeatureBox from './components/featureBox/FeatureBox.jsx';
+import Accordion from './components/accordion/Accordion.jsx';
 
 export default function ProductPage({ SiteData }) {
     const [PageData, setBanner] = useState([]);
@@ -33,19 +33,9 @@ export default function ProductPage({ SiteData }) {
 
     ///sort date 
     const DataSortComponent = (data) => {
+        // let sortedData;
         const sortedData = [...data].sort((a, b) => a.Release.localeCompare(b.Release));
-        const rearrangedData = Object.entries(
-            sortedData.map((item, i) => [
-                 {
-                    Id: item.Id,
-                    Title: item.Release.split('-')[0],
-                    Name: item.Name,
-                    Content: item.Description,
-                    Image: item.Image
-                }
-            ])
-        );
-        return rearrangedData;
+        return sortedData;
     };
 
     return (
@@ -138,7 +128,17 @@ export default function ProductPage({ SiteData }) {
                         PageData.FeatureSec3.map((item, index) =>
                             <FeatureBox key={index} featureItems={item} alignment="center" error={"Sorry, no data found"}></FeatureBox>)
                     }
-                    <Accordion acrItems={(DataSortComponent(productData))} error={"Sorry, no data found"}></Accordion>
+                    <div className="accordionSet">
+                        <Accordion data={DataSortComponent(productData)}></Accordion>
+                        {
+                            // DataSortComponent(productData).map((item, index) => (
+                            //     <Accordion key={index} Title={item.Release.split('-')[0]}>
+                            //         <h4>{item.Name}</h4>
+                            //         <p>{item.Content}</p>
+                            //     </Accordion>
+                            // ))
+                        }
+                    </div>
                 </div>
             </div>
         </>

@@ -1,6 +1,6 @@
-import { useState, useRef }    from 'react'
+import { useState }            from 'react'
 
-import Modal                   from "../modals/Modal";
+import Modal                   from "../modals/Modal2";
 // import Currency from "./Currency";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,14 +19,22 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
     const nowData = moment().format('yyyy'), freeAfer = 15;
 
     //modal
-    const [data, setData] = useState(null);
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleItem = (item = null) => {
-        setData(item);
-        setIsOpen(item !== null);
-        const html = document.querySelector('html');
-        isOpen ? html.classList.remove("overflow_hidden") : html.classList.add("overflow_hidden");
-    };
+    // const modalRef = useRef([null]);
+    // const [isOpen, setIsOpen] = useState(false);
+    // const toggleItem = (event) => {
+    //     console.log(modalRef.current, event.currentTarget);
+
+    //      if (modalRef.current && !modalRef.current.contains(event.currentTarget)) {
+    //     setIsOpen(!isOpen);
+    //     console.log("call");
+
+    //     const html = document.querySelector('html');
+    //     isOpen ? html.classList.remove("overflow_hidden") : html.classList.add("overflow_hidden");
+    //      }
+    // };
+
+    const [modal, setModal] = useState(false);
+    const Toggle = () => setModal(!modal);
 
     return <>
         {items.length === 0 && <p>{error}</p>}
@@ -67,47 +75,17 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 </div>
                                 : null}
 
-                            {item.Trailer && <span className="btn_trailer" onClick={() => {
-                                toggleItem({
-                                    Content:
-                                        `<video poster=${item.Image} controls>
-                                                        <source src=${item.Video} type="video/mp4">
-                                                        Your browser does not support the video tag.
-                                                    </video>`,
-                                    Class: "trailer_modal center",
-                                })
-                            }}>Watch Trailer</span>}
-
-                            <div className="btn_wrap">
-                                {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfer ? (
-                                    < button className="btn btn_action" onClick={() => {
-                                        toggleItem({
-                                            Title: `${item.Name} <span className="year">- ${item.Release.split('-')[0]}</span>`,
-                                            Content:
-                                                `<video poster=${item.Image} controls>
-                                                        <source src=${item.Video} type="video/mp4">
-                                                        Your browser does not support the video tag.
-                                                    </video>`,
-                                            Class: "product_modal center",
-                                        })
-                                    }
-                                    }
-                                    >Free to watch</button>
-                                )
-                                    : (<div className="btn_wrap_buy">
-                                        <a href="#" className="btn btn_action">Buy</a>
-                                        <a href="#" className="btn btn_action">Rent</a>
-                                    </div>
-                                    )
-                                }
-                            </div>
+                            {item.Trailer && <span className="btn_trailer" onClick={Toggle} >Watch Trailer</span>}
+                            <Modal show={modal} title="My Modal" close={Toggle}>
+                                <video poster={item.Image} autoPlay playesinline="true" controls>
+                                    <source src={item.Video} type="video/mp4" />
+                                    Your browser does not support the video tag.
+                                </video>
+                            </Modal>
                         </div>
                     </SwiperSlide>
                 ))
             }
-        </Swiper>
-
-        {/* <Modal modalData={data} closeModal={() => toggleItem()} /> */}
-        {isOpen && data !== null && < Modal modalData={data} closeModal={() => toggleItem()} />}
+        </Swiper >
     </>;
 }

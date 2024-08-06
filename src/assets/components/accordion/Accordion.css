@@ -1,0 +1,6 @@
+/* .accordion_item .accordion_item_title:not(.collapsed){
+    background-color: var(--blue);
+}
+.accordion_item .accordion_item_content:not(.open) {
+    display: none;
+} */
