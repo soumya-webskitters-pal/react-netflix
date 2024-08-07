@@ -20,15 +20,20 @@ html.overflow_hidden {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: opacity 1s ease-in;
-    -webkit-transition: opacity 1s ease-in;
-    -moz-transition: opacity 1s ease-in;
-    -ms-transition: opacity 1s ease-in;
-    -o-transition: opacity 1s ease-in;
-    transition-delay: 0.5s;
+    transition: opacity 0.3s ease-out;
+    -webkit-transition: opacity 0.3s ease-out;
+    -moz-transition: opacity 0.3s ease-out;
+    -ms-transition: opacity 0.3s ease-out;
+    -o-transition: opacity 0.3s ease-out;
     opacity: 0;
     pointer-events: none;
+    background-color: rgba(255, 255, 255, 0.5);
+    filter: blur(15px);
+    -webkit-filter: blur(15px);
+}
+
+.modal_backdrop.dark:after {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal_backdrop.active:after,
@@ -55,12 +60,12 @@ html.overflow_hidden {
     color: var(--black);
     font-size: 16px;
     pointer-events: all;
-    transition: opacity 1.3s ease-in;
-    -webkit-transition: opacity 1.3s ease-in;
-    -moz-transition: opacity 1.3s ease-in;
-    -ms-transition: opacity 1.3s ease-in;
-    -o-transition: opacity 1.3s ease-in;
-    transition-delay: 0.5s;
+    transition: opacity 0.3s ease;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition-delay: 0.25s;
     opacity: 0;
     position: relative;
 }
@@ -106,6 +111,11 @@ html.overflow_hidden {
     cursor: pointer;
 }
 
+.modal_closeBtn.dark {
+    background-color: var(--white);
+    color: var(--black);
+}
+
 .modal_closeBtn:hover {
     color: var(--warning);
 }
@@ -117,4 +127,12 @@ html.overflow_hidden {
 
 .modal_body video {
     width: 100%
+}
+
+.video_box {
+    margin-bottom: 25px;
+}
+
+.desc {
+    margin-top: 20px;
 }

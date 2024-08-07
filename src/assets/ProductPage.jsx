@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
-import Banner from './components/banner/Banner.jsx';
-import ListItem from './components/listSection/List.jsx';
-import SelectBox from './components/selectBox/SelectBox.jsx';
-import FeatureBox from './components/featureBox/FeatureBox.jsx';
-import Accordion from './components/accordion/Accordion.jsx';
+import Banner                  from './components/banner/Banner.jsx';
+import ListItem                from './components/listSection/List.jsx';
+import SelectBox               from './components/selectBox/SelectBox.jsx';
+import FeatureBox              from './components/featureBox/FeatureBox.jsx';
+import Accordion               from './components/accordion/Accordion.jsx';
 
 export default function ProductPage({ SiteData }) {
     const [PageData, setBanner] = useState([]);
@@ -27,9 +27,9 @@ export default function ProductPage({ SiteData }) {
     }
 
     //fetch products on click
-    const SelectHandler = (e, m) => {
-        console.log(e, m)
-    }
+    // const SelectHandler = (e, m) => {
+    //     console.log(e, m)
+    // }
 
     ///sort date 
     const DataSortComponent = (data) => {
@@ -60,7 +60,7 @@ export default function ProductPage({ SiteData }) {
                 {[...productData] != undefined &&
                     <ListItem
                         items={[...productData]}
-                        OnSelectHandler={SelectHandler}
+                        // OnSelectHandler={SelectHandler}
                         selection={1}
                         currencyTag={selectCurrency}
                         sliderSetting={{
@@ -130,14 +130,6 @@ export default function ProductPage({ SiteData }) {
                     }
                     <div className="accordionSet">
                         <Accordion data={DataSortComponent(productData)}></Accordion>
-                        {
-                            // DataSortComponent(productData).map((item, index) => (
-                            //     <Accordion key={index} Title={item.Release.split('-')[0]}>
-                            //         <h4>{item.Name}</h4>
-                            //         <p>{item.Content}</p>
-                            //     </Accordion>
-                            // ))
-                        }
                     </div>
                 </div>
             </div>

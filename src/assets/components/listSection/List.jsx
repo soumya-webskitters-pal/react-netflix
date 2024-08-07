@@ -1,59 +1,46 @@
-import { useState }            from 'react'
-
-import Modal                   from "../modals/Modal2";
+import React, { useState }     from 'react';
+import Modal                   from "../modals/Modal";
 // import Currency from "./Currency";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
 import { Navigation }          from 'swiper/modules';
 import 'swiper/css/navigation';
-
 import moment                  from "moment";
-
-//import list module css
 import "../listSection/List.css";
-
 
 export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
     const [selectedIndex, setIndex] = useState();
-    const nowData = moment().format('yyyy'), freeAfer = 15;
+    const [activeModal, setActiveModal] = useState({ isVisible: false, index: -1 });
+    const nowData = moment().format('yyyy');
+    const freeAfter = 15;
 
-    //modal
-    // const modalRef = useRef([null]);
-    // const [isOpen, setIsOpen] = useState(false);
-    // const toggleItem = (event) => {
-    //     console.log(modalRef.current, event.currentTarget);
+    const closeModal = () => {
+        setActiveModal({ isVisible: false, index: -1 });
+    };
 
-    //      if (modalRef.current && !modalRef.current.contains(event.currentTarget)) {
-    //     setIsOpen(!isOpen);
-    //     console.log("call");
+    const handleClick = (index) => {
+        setActiveModal({ isVisible: true, index });
+    };
 
-    //     const html = document.querySelector('html');
-    //     isOpen ? html.classList.remove("overflow_hidden") : html.classList.add("overflow_hidden");
-    //      }
-    // };
-
-    const [modal, setModal] = useState(false);
-    const Toggle = () => setModal(!modal);
-
-    return <>
-        {items.length === 0 && <p>{error}</p>}
-        <Swiper
-            className="list_box" {...sliderSetting}
-            navigation={true}
-            modules={[Navigation]}
-        // onSlideChange={(e) => console.log(e)}
-        // onSwiper={(swiper) => console.log(swiper)}
-        >
-            {
-                items.map((item, index) => (
+    return (
+        <>
+            {items.length === 0 && <p>{error}</p>}
+            <Swiper
+                className="list_box" {...sliderSetting}
+                navigation={true}
+                modules={[Navigation]}
+            // onSlideChange={(e) => console.log(e)}
+            // onSwiper={(swiper) => console.log(swiper)}
+            >
+                {items.map((item, index) => (
                     <SwiperSlide key={index}
                         className={selectedIndex === index || (selectedIndex === undefined && index === selection) ? "list-item active" : "list-item"}
                         onClick={() => {
-                            OnSelectHandler(item, index);
+                            // OnSelectHandler(item, index);
                             setIndex(index);
                         }}>
-                        <div className="inner_item">
+                        <div className="inner_item" key={item.Name + index}>
                             {item.Image ?
                                 <figure className="item_img"><img src={item.Image} alt={item.Name} /></figure>
                                 :
@@ -75,17 +62,60 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 </div>
                                 : null}
 
-                            {item.Trailer && <span className="btn_trailer" onClick={Toggle} >Watch Trailer</span>}
-                            <Modal show={modal} title="My Modal" close={Toggle}>
-                                <video poster={item.Image} autoPlay playesinline="true" controls>
-                                    <source src={item.Video} type="video/mp4" />
-                                    Your browser does not support the video tag.
-                                </video>
-                            </Modal>
+                            {item.Trailer && (
+                                <span className="btn_trailer" onClick={() => handleClick(index)}>
+                                    Watch Trailer
+                                </span>
+                            )}
+                            {activeModal.index === index && activeModal.isVisible && (
+                                <Modal
+                                    Title={item.Name}
+                                    close={closeModal}
+                                    settings={{ darkMode: true, modalClass: "trailer_modal" }}
+                                >
+                                    <div className="video_box">
+                                        <video poster={item.Image} autoPlay playsInline controls>
+                                            <source src={item.Video} type="video/mp4" />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    <div className="desc">
+                                        <p>{item.Description}</p>
+                                    </div>
+                                </Modal>
+                            )}
+                            <div className="btn_wrap">
+                                {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfter ? (
+                                    <>
+                                        <button className="btn btn_action" onClick={() => handleClick(index)}>
+                                            Free to watch
+                                        </button>
+                                        {activeModal.index === index && activeModal.isVisible && (
+                                            <Modal
+                                                Title={`${item.Name} - ${item.Release.split('-')[0]}`}
+                                                close={closeModal}
+                                                settings={{ modalClass: "product_modal" }}
+                                            >
+                                                <div className="video_box">
+                                                    <video poster={item.Image} controls>
+                                                        <source src={item.Video} type="video/mp4" />
+                                                        Your browser does not support the video tag.
+                                                    </video>
+                                                </div>
+                                            </Modal>
+                                        )}
+                                    </>
+                                ) : (
+                                    <div className="btn_wrap_buy">
+                                        <a href="#" className="btn btn_action">Buy</a>
+                                        <a href="#" className="btn btn_action">Rent</a>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </SwiperSlide>
-                ))
-            }
-        </Swiper >
-    </>;
+                ))}
+            </Swiper>
+        </>
+    );
 }
