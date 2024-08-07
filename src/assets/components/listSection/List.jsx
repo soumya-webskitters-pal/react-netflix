@@ -10,17 +10,21 @@ import moment                  from "moment";
 import "../listSection/List.css";
 
 export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
+    const [activeModalType, setActiveModalType] = useState(null);
     const [selectedIndex, setIndex] = useState();
     const [activeModal, setActiveModal] = useState({ isVisible: false, index: -1 });
     const nowData = moment().format('yyyy');
     const freeAfter = 15;
 
-    const closeModal = () => {
+    const closeModal = (a, b) => {
+        console.log(a, b);
         setActiveModal({ isVisible: false, index: -1 });
     };
 
-    const handleClick = (index) => {
-        setActiveModal({ isVisible: true, index });
+    const showModal = (index) => {
+        console.log(activeModalType);
+        
+        setActiveModal({ isVisible: true, index: index });
     };
 
     return (
@@ -63,34 +67,36 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 : null}
 
                             {item.Trailer && (
-                                <span className="btn_trailer" onClick={() => handleClick(index)}>
+                                <><span className="btn_trailer" onClick={() => showModal(index)}>
                                     Watch Trailer
                                 </span>
+                                    {activeModal.index === index && activeModal.isVisible && activeModalType !== 'sale' && (
+                                        <Modal
+                                            Title={item.Name}
+                                            close={closeModal}
+                                            settings={{ darkMode: true, modalClass: "trailer_modal" }}
+                                        >
+                                            <div className="video_box">
+                                                <video poster={item.Image} autoPlay playsInline controls>
+                                                    <source src={item.Video} type="video/mp4" />
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                            <div className="desc">
+                                                <p>{item.Description}</p>
+                                            </div>
+                                        </Modal>
+                                    )}
+                                </>
                             )}
-                            {activeModal.index === index && activeModal.isVisible && (
-                                <Modal
-                                    Title={item.Name}
-                                    close={closeModal}
-                                    settings={{ darkMode: true, modalClass: "trailer_modal" }}
-                                >
-                                    <div className="video_box">
-                                        <video poster={item.Image} autoPlay playsInline controls>
-                                            <source src={item.Video} type="video/mp4" />
-                                            Your browser does not support the video tag.
-                                        </video>
-                                    </div>
-                                    <div className="desc">
-                                        <p>{item.Description}</p>
-                                    </div>
-                                </Modal>
-                            )}
+
                             <div className="btn_wrap">
                                 {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfter ? (
                                     <>
-                                        <button className="btn btn_action" onClick={() => handleClick(index)}>
+                                        <button className="btn btn_action" onClick={() => showModal(index)}>
                                             Free to watch
                                         </button>
-                                        {activeModal.index === index && activeModal.isVisible && (
+                                        {activeModal.index === index && activeModal.isVisible && activeModalType !== 'trailer' && (
                                             <Modal
                                                 Title={`${item.Name} - ${item.Release.split('-')[0]}`}
                                                 close={closeModal}
