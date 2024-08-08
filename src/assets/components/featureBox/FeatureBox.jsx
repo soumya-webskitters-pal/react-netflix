@@ -1,21 +1,21 @@
 //import Feature module css
 import "../featureBox/Feature.css";
 
-export default function FeatureBox({ featureItems, alignment, error }) {
+export default function FeatureBox({ featureItems, settings: {
+    extraClass = '',
+    alignment = '',
+    error = "Sorry, no data found"
+} = {} }) {
     // console.log(featureItems);
     return <>
         {
             featureItems.Caption ? (
-                <div className={alignment ? (
-                    alignment === "center" ? "header center" : (
-                        alignment === "left" ? "header right" : "header left"
-                    )
-                ) : "header"}>
+                <div className={`header header_${extraClass.toLowerCase()} ${alignment}`}>
                     <h2>{featureItems.Caption}</h2>
                     {featureItems.SubText ? <p>{featureItems.SubText}</p> : null}
                 </div>
             ) : (
-                <div className={alignment ? (`row featureRow ${String(alignment).toLowerCase()}`) : "row featureRow"}>
+                    <div className={`row row_${extraClass.toLowerCase()} featureRow ${alignment.toLowerCase()}`}>
                     {featureItems.Title || featureItems.Content || featureItems.Cta ? (
                         <div className={featureItems.Title || featureItems.Content || featureItems.Cta && featureItems.Image ? "left_col col-md-6" : "content_col col-12"}>
                             {

@@ -1,6 +1,6 @@
 import React, { useState }     from 'react';
 import Modal                   from "../modals/Modal";
-// import Currency from "./Currency";
+// import Currency                from '../currency/Currency';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/css';
@@ -10,18 +10,18 @@ import moment                  from "moment";
 import "../listSection/List.css";
 
 export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
+    //currency
     // const [activeModalType, setActiveModalType] = useState(null);
+
+    //for modal
     const [selectedIndex, setIndex] = useState();
     const [activeModal, setActiveModal] = useState({ isVisible: false, index: -1, flag: null });
     const nowData = moment().format('yyyy');
     const freeAfter = 15;
-
     const closeModal = (a, b) => {
         setActiveModal({ isVisible: false, index: -1, flag: null });
     };
-
     const showModal = (index, activeModalTag) => {
-        console.log(activeModalTag);
         setActiveModal({ isVisible: true, index: index, flag: activeModalTag });
     };
 
@@ -54,7 +54,11 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
 
                             {item.Author ? <div className="item_auth"><p>- By {item.Author}</p></div> : null}
 
-                            {/* <div className="price"><Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> */}
+                            {/* {
+                                !item.Sale && moment(nowData).diff(moment(item.Release), 'years') < freeAfter ?
+                                    <div className="price">
+                                        <Currency {...{ 'price': item.Price, 'baseCurrency': item.Currency, 'convertedCurrency': currencyTag }}></Currency></div> : null
+                            } */}
 
                             {item.Description ?
                                 <div className="item_desc">

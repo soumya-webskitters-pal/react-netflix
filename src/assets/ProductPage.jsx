@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import CurrencyRateFetch       from "./components/currency/CurrencyRateFetch";
 import Banner                  from './components/banner/Banner.jsx';
 import ListItem                from './components/listSection/List.jsx';
 import SelectBox               from './components/selectBox/SelectBox.jsx';
@@ -21,9 +22,38 @@ export default function ProductPage({ SiteData }) {
     }, []);
 
     //fetch currencies on chnage
-    const selectCurrency = (x) => {
-        console.log(">>", x)
-        return (x)
+    const [currency, setCurrency] = useState(null);
+    async function getCurrencyData(crTarget, crBase) {
+        const apiData = {
+            url: "https://api.freecurrencyapi.com/v1/latest",
+            apiKey: "fca_live_iTu53TOf94Z7oLeP1vqdTPOrtTvq1a8qlqqDqRGU",
+            baseCurrency: crBase,
+            TargetCurrency: crTarget,
+        }
+        await fetch(`${apiData.url}?apikey=${apiData.apiKey}&currencies=${apiData.TargetCurrency}& base_currency=${apiData.baseCurrency}`
+            , {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        )
+            .then(function (response) {
+                // console.log(":", response);
+                return response.json();
+            })
+            .then(function (setCr) {
+                console.log(">>", setCr.data, Object.values(setCr.data)[0]);
+               setCurrency(Object.values(setCr.data)[0]);
+            })
+            .catch((e) => {
+                console.log("err:", e.message);
+            });
+    }
+    const selectCurrency = (val) => {
+        getCurrencyData(val.current, val.prev);
+        console.log(">>", val, currency);
+        return (val)
     }
 
     //fetch products on click
@@ -46,14 +76,15 @@ export default function ProductPage({ SiteData }) {
                         options={[...currencies]}
                         // onChange={value => props.input.onChange(value)}
                         // onBlur={() => props.input.onBlur(props.input.value)}
-                        defaultValue={[...currencies][1]}
+                        //onChange={selectCurrency}
+                        defaultValue={[...currencies][0]}
                         OnChangeHandler={selectCurrency}
                     ></SelectBox>
                 }
             </div>
 
             {PageData != undefined ?
-                <Banner data={{ title: PageData.Title, subtitle: PageData.SubText, image: PageData.Image, page: PageData.Page, alignment: "center", error: " Sorry, no data found" }}></Banner> : null
+                <Banner setting={{ title: PageData.Title, subtitle: PageData.SubText, image: PageData.Image, extraClass: PageData.Page }}></Banner> : null
             }
 
             <div className="section">
@@ -62,7 +93,7 @@ export default function ProductPage({ SiteData }) {
                         items={[...productData]}
                         // OnSelectHandler={SelectHandler}
                         selection={1}
-                        currencyTag={selectCurrency}
+                        // currencyTag={selectCurrency}
                         sliderSetting={{
                             className: "list_box",
                             spaceBetween: 20,
@@ -113,11 +144,11 @@ export default function ProductPage({ SiteData }) {
                 <div className="container">
                     {PageData.FeatureSec1 != undefined &&
                         PageData.FeatureSec1.map((item, index) =>
-                            <FeatureBox key={index} featureItems={item} alignment="center" error={"Sorry, no data found"}></FeatureBox>)
+                            <FeatureBox key={index} featureItems={item} settings={{ alignment: "center" }} ></FeatureBox>)
                     }
                     {PageData.FeatureSec2 != undefined &&
                         PageData.FeatureSec2.map((item, index) =>
-                            <FeatureBox key={index} featureItems={item} alignment={index % 2 ? "right" : "left"} error={"Sorry, no data found"}></FeatureBox>)
+                            <FeatureBox key={index} featureItems={item} settings={{ alignment: index % 2 ? "right" : "left" }} ></FeatureBox>)
                     }
                 </div>
             </div>
@@ -126,13 +157,22 @@ export default function ProductPage({ SiteData }) {
                 <div className="container">
                     {PageData.FeatureSec3 != undefined &&
                         PageData.FeatureSec3.map((item, index) =>
-                            <FeatureBox key={index} featureItems={item} alignment="center" error={"Sorry, no data found"}></FeatureBox>)
+                            <FeatureBox key={index} featureItems={item} settings={{ alignment: "center" }} ></FeatureBox>)
                     }
                     <div className="accordionSet">
                         <Accordion data={DataSortComponent(productData)}></Accordion>
                     </div>
                 </div>
             </div>
+
+            {/* <div className="section">
+                <div className="container">
+                    {productData != undefined &&
+                        productData.map((item, index) =>
+                            <TabBox key={index} featureItems={item}></TabBox>)
+                    }
+                </div>
+            </div> */}
         </>
     )
 }

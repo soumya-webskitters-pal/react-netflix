@@ -338,15 +338,27 @@
   "Currencies": [
     {
       "value": "USD",
-      "label": "United States dollar"
+      "label": "US Dollar",
+      "symbol": "$",
+      "flag":"../assets/images/flags/usd.webp"
+    },
+    {
+      "value": "CAS",
+      "label": "Canadian Dollar",
+      "symbol": "$",
+        "flag":"../assets/images/flags/cas.webp"
     },
     {
       "value": "INR",
-      "label": "Indian Rupee"
+      "label": "Indian Rupee",
+      "symbol": "Rs.",
+        "flag":"../assets/images/flags/rs.webp"
     },
     {
       "value": "EUR",
-      "label": "Euro"
+      "label": "Euro",
+      "symbol": "€",
+        "flag":"../assets/images/flags/euro.webp"
     }
   ]
 }

@@ -1,21 +1,30 @@
 //import banner module css
 import "../banner/Banner.css";
 
-export default function Banner({ data }) {
+export default function Banner({ setting: {
+    title = '',
+    subtitle = '',
+    image = '',
+    cta = '',
+    ctaUrl = '#',
+    extraClass = '',
+    alignment = "center",
+    error = "Sorry, no data found"
+} }) {
     return <>
-        {<div className={data.alignment ? `banner ${String(data.alignment).toLowerCase()} ${String(data.page).toLowerCase()}` : `banner ${String(data.page).toLowerCase()}`}>
-            {data.image ?
+        {<div className={`banner banner_${extraClass.toLowerCase()} ${alignment.toLowerCase()}`}>
+            {image ?
                 <div className="banner_bgImg">
-                    <img src={data.image} alt="banner Image" />
+                    <img src={image} alt="banner Image" />
                 </div>
                 : null
             }
-            {data.title || data.subtitle || data.cta ?
+            {title.length || subtitle.length || cta.length ?
                 <div className="banner_headline">
                     <div className="container">
-                        <h1>{data.title}</h1>
-                        <p>{data.subtitle}</p>
-                        {data.cta ? <a href={data.ctaUrl}>{data.cta}</a> : null}
+                        <h1>{title}</h1>
+                        <p>{subtitle}</p>
+                        {cta ? <a href={ctaUrl}>{cta}</a> : null}
                     </div>
                 </div>
                 : null}
