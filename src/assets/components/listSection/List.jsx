@@ -10,21 +10,19 @@ import moment                  from "moment";
 import "../listSection/List.css";
 
 export default function List({ items, OnSelectHandler, selection, currencyTag, sliderSetting, error }) {
-    const [activeModalType, setActiveModalType] = useState(null);
+    // const [activeModalType, setActiveModalType] = useState(null);
     const [selectedIndex, setIndex] = useState();
-    const [activeModal, setActiveModal] = useState({ isVisible: false, index: -1 });
+    const [activeModal, setActiveModal] = useState({ isVisible: false, index: -1, flag: null });
     const nowData = moment().format('yyyy');
     const freeAfter = 15;
 
     const closeModal = (a, b) => {
-        console.log(a, b);
-        setActiveModal({ isVisible: false, index: -1 });
+        setActiveModal({ isVisible: false, index: -1, flag: null });
     };
 
-    const showModal = (index) => {
-        console.log(activeModalType);
-        
-        setActiveModal({ isVisible: true, index: index });
+    const showModal = (index, activeModalTag) => {
+        console.log(activeModalTag);
+        setActiveModal({ isVisible: true, index: index, flag: activeModalTag });
     };
 
     return (
@@ -67,13 +65,13 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                                 : null}
 
                             {item.Trailer && (
-                                <><span className="btn_trailer" onClick={() => showModal(index)}>
+                                <><span className="btn_trailer" onClick={() => showModal(index, "trailer")}>
                                     Watch Trailer
                                 </span>
-                                    {activeModal.index === index && activeModal.isVisible && activeModalType !== 'sale' && (
+                                    {activeModal.index === index && activeModal.isVisible && activeModal.flag === "trailer" && (
                                         <Modal
                                             Title={item.Name}
-                                            close={closeModal}
+                                            onClose={closeModal}
                                             settings={{ darkMode: true, modalClass: "trailer_modal" }}
                                         >
                                             <div className="video_box">
@@ -93,13 +91,13 @@ export default function List({ items, OnSelectHandler, selection, currencyTag, s
                             <div className="btn_wrap">
                                 {item.Sale && moment(nowData).diff(moment(item.Release), 'years') > freeAfter ? (
                                     <>
-                                        <button className="btn btn_action" onClick={() => showModal(index)}>
+                                        <button className="btn btn_action" onClick={() => showModal(index, "watch")}>
                                             Free to watch
                                         </button>
-                                        {activeModal.index === index && activeModal.isVisible && activeModalType !== 'trailer' && (
+                                        {activeModal.index === index && activeModal.isVisible && activeModal.flag === "watch" && (
                                             <Modal
                                                 Title={`${item.Name} - ${item.Release.split('-')[0]}`}
-                                                close={closeModal}
+                                                onClose={closeModal}
                                                 settings={{ modalClass: "product_modal" }}
                                             >
                                                 <div className="video_box">

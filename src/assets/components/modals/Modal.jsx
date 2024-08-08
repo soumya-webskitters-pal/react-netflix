@@ -14,8 +14,6 @@ const Modal = ({
         footer = false
     } = {}
 }) => {
-    console.log("::",onClose);
-
     const [fadeIn, setfadeIn] = useState(false);
     useEffect(() => {
         setfadeIn(true);
@@ -23,7 +21,7 @@ const Modal = ({
         //     setfadeIn(true);
         // }, 1);
         // return () => clearTimeout(timer);
-    }, []);
+    }, [onClose]);
 
     return createPortal(
         <>
